@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Checkout Code') {
-      steps {
-        git(url: 'https://github.com/aftab-s/Jenkins-101', branch: 'main')
+      parallel {
+        stage('Checkout Code') {
+          steps {
+            git(url: 'https://github.com/aftab-s/Jenkins-101', branch: 'main')
+          }
+        }
+
+        stage('NPM Installation') {
+          steps {
+            sh 'apt install npm && apt install nodejs'
+          }
+        }
+
       }
     }
 
