@@ -2,19 +2,8 @@ pipeline {
   agent any
   stages {
     stage('Checkout Code') {
-      parallel {
-        stage('Checkout Code') {
-          steps {
-            git(url: 'https://github.com/aftab-s/Jenkins-101', branch: 'main')
-          }
-        }
-
-        stage('NPM Installation') {
-          steps {
-            sh 'sudo su && apt install npm && apt install nodejs'
-          }
-        }
-
+      steps {
+        git(url: 'https://github.com/aftab-s/Jenkins-101', branch: 'main')
       }
     }
 
@@ -28,7 +17,7 @@ pipeline {
 
         stage('Frontend Unit Test') {
           steps {
-            sh 'cd curriculum-app/curriculum-front && npm i && npm run test:unit'
+            sh 'cd curriculum-app/curriculum-front && npm -i && npm run test:unit'
           }
         }
 
