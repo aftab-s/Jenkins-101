@@ -17,7 +17,7 @@ pipeline {
 
         stage('Install Global Dependancies') {
           steps {
-            sh 'npm -v || (sudo apt-get install -y nodejs npm)'
+            sh 'npm -v || (apt install -y nodejs npm)'
           }
         }
 
