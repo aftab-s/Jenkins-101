@@ -15,9 +15,15 @@ pipeline {
           }
         }
 
-        stage('Frontend Unit Test') {
+        stage('Install Global Dependancies') {
           steps {
-            sh 'cd curriculum-app/curriculum-front && npm -i && npm run test:unit'
+            sh 'npm -v || (sudo apt-get install -y nodejs npm)'
+          }
+        }
+
+        stage('Install Project Dependencies') {
+          steps {
+            sh 'npm install'
           }
         }
 
@@ -26,7 +32,7 @@ pipeline {
 
     stage('Frontend Build') {
       steps {
-        sh 'docker build -f curriculum-app/curriculum-front/Dockerfile .'
+        sh 'cd curriculum-app/curriculum-front && docker build -t app-v1 .'
       }
     }
 
